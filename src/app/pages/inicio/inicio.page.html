@@ -1,0 +1,77 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+      <ion-img src="assets/img/Logo_DuocUC.svg.png" width="50" slot="start"></ion-img>
+    
+    <ion-title >
+      <h1 class="slide-animation">Sistema asistencia DUOCUC </h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      
+        <ion-img src="assets/img/Logo_DuocUC.svg.png" slot="start"></ion-img>
+      
+      <ion-title size="large" class="slide-animation">
+        <h1  class="slide-animation">Tu Título</h1>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  
+  <ion-content>
+
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bienvenida {{ nombreUsuario }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <br>
+        
+
+  <ion-toolbar>
+    <ion-segment value="" (ionChange)="cambiarComponete($event)">
+      <ion-segment-button value="qr">
+        <ion-label>qr</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="miClase">
+        <ion-label>Mi clasee</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="foro">
+        <ion-label>Foro</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="misDatos">
+        <ion-label>Mi datos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+
+  <app-qr [hidden]="componente_actual != 'qr'"> 
+    <app-qr> 
+
+  <app-mi-clase [hidden]="componente_actual != 'miClase'">
+
+  </app-mi-clase>
+
+
+  <app-foro [hidden]="componente_actual != 'foro'">
+
+    
+  </app-foro>
+
+
+  <app-mis-datos [hidden]="componente_actual != 'misDatos'">
+
+    
+  </app-mis-datos>
+
