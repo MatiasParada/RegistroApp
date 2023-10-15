@@ -1,30 +1,29 @@
-<!-- Input para cargar imágenes -->
+
+
+
+
+
 <input #fileinput hidden id="input-file" type="file" accept="image/*;capture=camera" (change)="verificarArchivoConQR($event)" />
 
-<!-- Botón para comenzar el escaneo de QR -->
+
 <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" expand="full" shape="round">
   <ion-icon slot="start" name="videocam-outline"></ion-icon>
   Comenzar Escaneo de QR
 </ion-button>
 
-<!-- Botón para detener el escaneo de QR -->
+
 <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" expand="full" shape="round">
   <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
   Detener escaneo de QR
 </ion-button>
 
-<!-- Video para mostrar la cámara -->
+
 <video #video [hidden]="!escaneando" width="100%"></video>
 
-<!-- Canvas para procesamiento de imagen -->
+
 <canvas #canvas hidden></canvas>
 
-<!-- Código para mostrar información de escaneo (opcional) -->
-<!--
-<h3>
-  Escaneando: {{ escaneando }}
-</h3>
--->
+
 
 
 

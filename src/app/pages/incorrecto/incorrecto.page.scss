@@ -1,0 +1,41 @@
+
+ion-content {
+    --background: #ffffff; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  
+ 
+  ion-card-content {
+    text-align: center;
+  }
+  
+  
+  ion-img {
+    max-width: 500px; 
+    margin: 0 auto;
+    margin-bottom: 20px; 
+    align-items: center;
+    margin: auto;
+    display: block;
+  }
+  
+  
+  ion-card-subtitle {
+    font-size: 24px; 
+    font-weight: bold; 
+    color: red; 
+  }
+  
+  
+  ion-button {
+    width: 80%; 
+    max-width: 200px; 
+    margin: 0 auto; 
+    margin-top: 20px; 
+  }
+  
+  

@@ -36,8 +36,12 @@ export class IngresoPage implements OnInit {
 
     
   }
+  
+// solo para hacer las pruebas mas rapido 
+  public entrar ():void{ 
 
-
+    this.router.navigate(['/inicio']);
+  }
 
   public ingresar(): void {
 
