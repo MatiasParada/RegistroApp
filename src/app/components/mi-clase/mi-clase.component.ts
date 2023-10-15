@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QrComponent } from 'src/app/components/qr/qr.component';  
+import { DataSharingService } from '../../data-sharing.service';
 
 @Component({
   selector: 'app-mi-clase',
@@ -14,6 +15,8 @@ import { QrComponent } from 'src/app/components/qr/qr.component';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class MiClaseComponent implements OnInit {
+
+  datosActualizados = false;
 
   public bloqueInicio!: number;
   public bloqueTermino!: number;
@@ -26,26 +29,32 @@ export class MiClaseComponent implements OnInit {
   public seccion!: string;
   public sede!: string;
 
- constructor(private router: Router, private qrComponent: QrComponent) { }
-
-  ngOnInit() {
-    this.qrComponent.datosQRListos.subscribe(objetoDatosQR => {
-      this.bloqueInicio = objetoDatosQR.bloqueInicio;
-      this.bloqueTermino = objetoDatosQR.bloqueTermino;
-      this.dia = objetoDatosQR.dia;
-      this.horaFin = objetoDatosQR.horaFin;
-      this.horaInicio = objetoDatosQR.horaInicio;
-      this.idAsignatura = objetoDatosQR.idAsignatura;
-      this.nombreAsignatura = objetoDatosQR.nombreAsignatura;
-      this.nombreProfesor = objetoDatosQR.nombreProfesor;
-      this.seccion = objetoDatosQR.seccion;
-      this.sede = objetoDatosQR.sede;
-    });
+  
+    constructor(private dataSharingService: DataSharingService) { }
+  
+    ngOnInit() {
+      
+      this.dataSharingService.datosActualizados$.subscribe(actualizado => {
+        this.datosActualizados = actualizado;
+        if (this.datosActualizados=true) {
+          console.log("actualizado")
+          this.dataSharingService.datosQR$.subscribe(datos => {
+            if (datos) {
+              const objetoDatosQR = JSON.parse(datos);
+              this.bloqueInicio = objetoDatosQR.bloqueInicio;
+              this.bloqueTermino = objetoDatosQR.bloqueTermino;
+              this.dia = objetoDatosQR.dia;
+              this.horaFin = objetoDatosQR.horaFin;
+              this.horaInicio = objetoDatosQR.horaInicio;
+              this.idAsignatura = objetoDatosQR.idAsignatura;
+              this.nombreAsignatura = objetoDatosQR.nombreAsignatura;
+              this.nombreProfesor = objetoDatosQR.nombreProfesor;
+              this.seccion = objetoDatosQR.seccion;
+              this.sede = objetoDatosQR.sede;
+            }
+          });
+        }
+      });
+    }
   }
-
-
-
-
-
-}
 

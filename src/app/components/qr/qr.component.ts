@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import jsQR, { QRCode } from 'jsqr';
+import { BehaviorSubject } from 'rxjs';
+import { DataSharingService } from '../../data-sharing.service';
 
 @Component({
   selector: 'app-qr',
@@ -20,7 +22,7 @@ export class QrComponent implements OnInit {
 
   public nombreUsuario!: string;
 
-  @Output() datosQRListos = new EventEmitter<any>();
+  private datosQRListos = new BehaviorSubject<any>(null);
   @Output() cambiarComponete = new EventEmitter<boolean>();
 
   @ViewChild('video', { static: false })
@@ -47,7 +49,8 @@ export class QrComponent implements OnInit {
   constructor(
     private loadingController: LoadingController,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataSharingService: DataSharingService
   ) { }
 
   ngOnInit() {
@@ -99,6 +102,7 @@ export class QrComponent implements OnInit {
       this.escaneando = false;
       this.datosQR = qrCode.data;
       this.mostrarDatosQROrdenados(this.datosQR);
+      this.dataSharingService.actualizarDatosQR(this.datosQR)
     }
     return this.datosQR !== '';
   }
@@ -116,7 +120,8 @@ export class QrComponent implements OnInit {
     this.seccion = objetoDatosQR.seccion;
     this.sede = objetoDatosQR.sede;
 
-    this.datosQRListos.emit({
+    
+    this.datosQRListos.next({
       bloqueInicio: this.bloqueInicio,
       bloqueTermino: this.bloqueTermino,
       dia: this.dia,
@@ -127,8 +132,12 @@ export class QrComponent implements OnInit {
       nombreProfesor: this.nombreProfesor,
       seccion: this.seccion,
       sede: this.sede
-
+      
     });
+    
+  }
+  public getDatosQRListos() {
+    return this.datosQRListos.asObservable();
   }
 
   async verificarVideo() {
