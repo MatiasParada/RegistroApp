@@ -28,7 +28,7 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.nombreUsuario = params['nombreUsuario'];
+      
 
     });
   }

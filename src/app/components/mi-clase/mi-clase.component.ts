@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ export class MiClaseComponent implements OnInit {
   public seccion!: string;
   public sede!: string;
 
-  constructor(private route: ActivatedRoute, private activatedRoute: ActivatedRoute, private router: Router,private qrComponent: QrComponent ) { }
+ constructor(private router: Router, private qrComponent: QrComponent) { }
 
   ngOnInit() {
     this.qrComponent.datosQRListos.subscribe(objetoDatosQR => {
@@ -47,8 +47,5 @@ export class MiClaseComponent implements OnInit {
 
 
 
-  volver() {
-    this.router.navigate(['/inicio']);
-  }
 }
 
